@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shuffling Boxes</title>
+	<style>
+		#box1{width: 70px;
+			  height: 100px;
+			  background-color: red;
+			  position: absolute;
+			  left: 120px;
+			  top: 120px;
+			  -webkit-transition: all 3s ease-out 0s;
+			  z-index:3;}
+		#box2{width: 70px;
+			  height: 100px;
+			  background-color: green;
+			  position: absolute;
+			  left: 110px;
+			  top: 110px;
+			  -webkit-transition: all 3s ease-out 0s;
+			  z-index:2;}
+		#box3{width: 70px;
+			  height: 100px;
+			  background-color: purple;
+			  position: absolute;
+			  left: 100px;
+			  top: 100px;			  
+			  -webkit-transition: all 3s ease-out 0s;
+			  z-index:1;}
+		button{position: absolute;
+			   top: 300px;
+			   height: 40px;
+			   width: 120px;
+			   border-radius: 30px;
+			   font-size: 20px;}
+	</style>
+</head>
+<body>
+	<h1><u>Shuffling Boxes</u></h1>
+	<div id="box1"><p>1</p></div>
+	<div id="box2"><p>2</p></div>
+	<div id="box3"><p>3</p></div>
+	<button id="btn">Shuffle</button>
+	<script>
+		//variables
+		var btn = document.getElementById("btn");
+		var box1 = document.getElementById("box1");
+		var box2 = document.getElementById("box2");
+		var box3 = document.getElementById("box3");
+		var state = 0;
+		
+		//button listener
+		btn.addEventListener("click",function(){
+			shuffle();
+		});
+		
+		// shuffle(); this shifts the position of the boxes
+		function shuffle(){
+			if(state === 0){
+				// slide out the top box
+				box1.style.left = 300 + "px";
+				
+				// slide up the other 2 boxes
+				setTimeout(function(){
+					box2.style.left = 120 + "px";
+					box2.style.top = 120 + "px";
+					box3.style.left = 110 + "px";
+					box3.style.top = 110 + "px";
+				},3000);
+				
+				// change the indexes of the boxes & slide the old top box into the bottom
+				setTimeout(function(){
+					box1.style.zIndex = 1;
+					box2.style.zIndex = 3;
+					box3.style.zIndex = 2;
+					box1.style.top = 100 + "px";
+					box1.style.left = 100 + "px";
+					// change the state
+					state = 1;
+				},6000);
+			}
+			if(state === 1){
+				// slide out the top box
+				box2.style.left = 300 + "px";
+				
+				// slide up the other 2 boxes
+				setTimeout(function(){
+					box3.style.left = 120 + "px";
+					box3.style.top = 120 + "px";
+					box1.style.left = 110 + "px";
+					box1.style.top = 110 + "px";
+				},3000);
+				
+				// change the indexes of the boxes & slide the old top box into the bottom
+				setTimeout(function(){
+					box1.style.zIndex = 2;
+					box2.style.zIndex = 1;
+					box3.style.zIndex = 3;
+					box2.style.top = 100 + "px";
+					box2.style.left = 100 + "px";
+					// change the state
+					state = 2;
+				},6000);
+			}
+			if(state === 2){
+				// slide out the top box
+				box3.style.left = 300 + "px";
+				
+				// slide up the other 2 boxes
+				setTimeout(function(){
+					box1.style.left = 120 + "px";
+					box1.style.top = 120 + "px";
+					box2.style.left = 110 + "px";
+					box2.style.top = 110 + "px";
+				},3000);
+				
+				// change the indexes of the boxes & slide the old top box into the bottom
+				setTimeout(function(){
+					box1.style.zIndex = 3;
+					box2.style.zIndex = 2;
+					box3.style.zIndex = 1;
+					box3.style.top = 100 + "px";
+					box3.style.left = 100 + "px";
+					// change the state
+					state = 0;
+				},6000);
+			}
+		}
+	</script>
+</body>
+</html>
